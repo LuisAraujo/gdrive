@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="George Masceddo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazer login - Contas Google</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .input-group {
+            position: relative;
+        }
+
+        .input-field {
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 16px 12px;
+            width: 100%;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        
+        .input-label {
+            position: absolute;
+            top: 17px;
+            left: 13px;
+            color: #5f6368;
+            font-size: 16px;
+            pointer-events: none;
+            transition: all 0.2s ease-out;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border: 2px solid #1a73e8;
+            padding: 15px 11px;
+        }
+
+        .input-field:focus + .input-label,
+        .input-field:not(:placeholder-shown) + .input-label {
+            top: -8px;
+            left: 10px;
+            font-size: 12px;
+            color: #1a73e8;
+            background-color: #ffffff;
+            padding: 0 4px;
+        }
+
+        /* --- Estilo da Assinatura Visual --- */
+        .watermark-signature {
+            position: fixed; /* Fixa na tela, independente da rolagem */
+            bottom: 12px;    /* Distância do fundo */
+            left: 15px;      /* Distância da esquerda */
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            font-size: 13px;
+            color: #5f6368;  /* Mesma cor dos textos secundários do Google */
+            opacity: 0.5;    /* 50% de transparência: visível mas discreto */
+            z-index: 10000;  /* Garante que fique acima de tudo */
+            pointer-events: none; /* O clique passa através do texto */
+            user-select: none;    /* Não permite selecionar o texto */
+            font-weight: 500;
+        }
+
+        /* Ajuste para modo escuro caso o sistema do usuário esteja nesse modo */
+        @media (prefers-color-scheme: dark) {
+            .watermark-signature {
+                color: #9aa0a6;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen font-sans">
+
+    <!-- Container principal da tela de login -->
+    <div class="bg-white border border-gray-200 rounded-lg p-10 w-full max-w-md relative z-10">
+        
+        <!-- Cabeçalho com o logo e título -->
+        <div class="text-center mb-8">
+            <!-- Logo do Google -->
+            <svg class="w-8 h-8 mx-auto mb-4" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                <path fill="none" d="M1 1h22v22H1z"/>
+            </svg>
+            <h1 class="text-2xl text-gray-800">Fazer login</h1>
+            <p class="text-gray-600 mt-2">Prosseguir para o Google Drive</p>
+        </div>
+
+        <!-- Formulário de login -->
+        <form>
+            <div class="space-y-6">
+                <!-- Campo de E-mail ou telefone -->
+                <div class="input-group">
+                    <input type="email" id="email" class="input-field" placeholder=" " />
+                    <label for="email" class="input-label">E-mail ou telefone</label>
+                </div>
+                
+                <div>
+                    <a href="#" class="text-sm font-semibold text-blue-600 hover:text-blue-700">Esqueceu seu e-mail?</a>
+                </div>
+            </div>
+
+            <!-- Seção de informações sobre modo visitante -->
+            <p class="text-sm text-gray-600 mt-8">
+                Não está no seu computador? Use o modo visitante para fazer login com privacidade.
+                <a href="#" class="font-semibold text-blue-600 hover:text-blue-700">Saiba como usar o modo visitante</a>.
+            </p>
+
+            <!-- Botões de ação -->
+            <div class="flex justify-between items-center mt-8">
+                <a href="#" class="text-sm font-semibold text-blue-600 hover:bg-blue-50 p-2 rounded">Criar conta</a>
+                <button type="submit" class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Avançar
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Rodapé da página -->
+    <footer class="absolute bottom-4 w-full max-w-lg mx-auto">
+        <div class="flex justify-between items-center px-4 text-xs text-gray-600">
+            <div>
+                <select class="bg-transparent">
+                    <option>Português (Brasil)</option>
+                    <option>English (United States)</option>
+                </select>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:underline">Ajuda</a>
+                <a href="#" class="hover:underline">Privacidade</a>
+                <a href="#" class="hover:underline">Termos</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- A Assinatura Visual (Front-end) -->
+    <div class="watermark-signature">george_masceddo</div>
+
+</body>
+</html>
